@@ -7,7 +7,7 @@ import os
 
 # Define paths for the models
 MODEL_PATHS = {
-    "Scratch CNN": './ML_Models/emotion_detection_model_base_cnn.h5',
+    "Scratch CNN Model": './ML_Models/emotion_detection_model_base_cnn.h5',
     "ImageNet Model": './ML_Models/emotion_detection_imagenet_model.h5',
     "MobileNet Model": './ML_Models/emotion_detection_mobilenet_model.h5',
     "VGG16 Model": './ML_Models/emotion_detection_vgg16_model.h5'
@@ -61,7 +61,7 @@ def preprocess_image(image_path, model_name, target_size=(48, 48)):
     image = image / 255.0  # Normalize pixel values
 
     # Repeat channels if model is not base_cnn
-    if model_name != "Scratch CNN":
+    if model_name != "Scratch CNN Model":
         image = np.repeat(image, 3, axis=-1)
 
     # Add batch dimension
@@ -145,7 +145,7 @@ def index():
     images = []
     predicted_emotion = None
 
-    dropdown_options = ["Select a model", "Scratch CNN", "ImageNet Model",
+    dropdown_options = ["Select a model", "Scratch CNN Model", "ImageNet Model",
                         "MobileNet Model", "VGG16 Model"]
 
     if request.method == 'POST':

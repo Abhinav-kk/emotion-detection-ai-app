@@ -69,7 +69,7 @@
                 <span class="emotion-text">{{ predicted_emotion.capitalize() }}</span>
                 <img src="{{ url_for('static', filename=predicted_emotion + '.jpg') }}"
                     alt="{{ predicted_emotion }} image" class="emotion-image">
-                <span class="emotion-model">Prediction made with {{ model_name.capitalize() }} model!</span>
+                <span class="emotion-model">Prediction made with {{ model_name.capitalize() }}!</span>
             </div>
             {% endif %}
         </div>
