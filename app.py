@@ -145,7 +145,7 @@ def index():
     images = []
     predicted_emotion = None
 
-    dropdown_options = ["Select a model", "Scratch CNN Model", "ImageNet Model",
+    dropdown_options = ["Scratch CNN Model", "ImageNet Model",
                         "MobileNet Model", "VGG16 Model"]
 
     if request.method == 'POST':
