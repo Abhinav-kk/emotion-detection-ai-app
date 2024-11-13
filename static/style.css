@@ -1,0 +1,375 @@
+/* Floating container style */
+.floating-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Allows clicks to pass through */
+    overflow: hidden;
+    z-index: -1;
+    /* Default: behind content */
+}
+
+/* Loading overlay style with a lower z-index */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    /* Ensure it’s behind the floating elements during loading */
+}
+
+/* Hoverable floating elements style */
+.floating-element {
+    position: absolute;
+    bottom: -50px;
+    width: 100px;
+    height: 20px;
+    background-color: #FCBF49;
+    border-radius: 20%;
+    animation: floatAnimation 8s linear infinite;
+    opacity: 0.8;
+}
+
+
+/* Define animation keyframes */
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0) scale(1);
+        /* Starting point */
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) scale(0.5);
+        /* Move up and shrink */
+        opacity: 0;
+        /* Fade out */
+    }
+}
+
+
+
+/* Spinner styles */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #FCBF49;
+    border-top: 5px solid #4a86c5;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F0EE;
+    background-image: repeating-radial-gradient(circle at 0 0, #ccc, #ccc 2px, transparent 2px, transparent 20px);
+    background-size: 20px 20px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    color: #283C3C;
+}
+
+
+.container {
+    max-width: 100%;
+    /* Change to fill the entire width */
+    padding: 0;
+    /* Remove padding */
+    background-color: transparent;
+    /* Remove background color to blend with body */
+    box-shadow: none;
+    /* Remove the shadow */
+    border-radius: 0;
+    /* No rounding to match the rest of the page */
+    text-align: center;
+    margin: 0;
+    z-index: 1;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+header .logo {
+    width: 150px;
+    /* Adjust width according to logo size */
+    /* margin-top: 200px;
+    margin-bottom: 10px; */
+    /* Spacing below the logo */
+    position: absolute;
+    top: 10px;
+    left: 30px;
+}
+
+header h2 {
+    color: #B83A14;
+    /* Red theme color for headings */
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #283C3C;
+    /* Black-green theme for labels */
+    font-weight: bold;
+    font-size: larger;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    /* Rounded corners */
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #fff;
+    -webkit-appearance: none;
+    /* Remove default arrow for a custom arrow look */
+    -moz-appearance: none;
+    /* For Firefox */
+    appearance: none;
+    position: relative;
+    /* To position the arrow */
+    padding-right: 30px;
+    /* Extra padding to make space for the arrow */
+}
+
+select::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #B83A14;
+    pointer-events: none;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 10px;
+    /* Rounded corners */
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #FCBF49;
+    /* Set color similar to button */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    /* Rounded corners */
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #B83A14;
+    /* Darken on hover */
+}
+
+button {
+    background-color: #FCBF49;
+    /* Yellow theme color for buttons */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border-radius: 30px 62px;
+    /* Set to 10px for a subtle rounded look */
+    padding: 25px 62px;
+    /* Increase padding for a modern look */
+}
+
+button:hover {
+    background-color: #B83A14;
+    /* Darken to red on hover */
+}
+
+.result {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #fff3cd;
+    /* Light yellow background for the result */
+    border: 1px solid #ffeeba;
+    border-radius: 30px;
+    text-align: center;
+    /* Center align the result */
+}
+
+.result h3 {
+    color: #B83A14;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.emotion-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.emotion-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4a86c5;
+    margin-bottom: 10px;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.emotion-model {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #293747;
+    margin-bottom: 10px;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.emotion-image {
+    width: 150px;
+    /* Size for larger display */
+    height: 150px;
+    object-fit: contain;
+    /* Contain the image without cropping */
+    padding: 10px;
+    /* Optional: Add padding around the image */
+    border: 2px solid #4a86c5;
+    border-radius: 10px;
+    /* Optional: Soft border rounding */
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
+
+}
+
+.emotion-image:hover {
+    transform: scale(1.05);
+}
+
+
+.result p {
+    color: #283C3C;
+    /* Black-green for result text */
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.image-section {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.image-container {}
+
+.form-image {
+    height: 150px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #90151c;
+    /* Red border for images */
+    transition: transform 0.3s ease;
+}
+
+.form-image:hover {
+    transform: scale(1.8);
+    /* Slightly scale up the image on hover */
+}
+
+/* technologies-used banner kind top right */
+.technologies-used {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #f5c055;
+    color: #303030;
+    padding: 15px 15px;
+    font-size: 1.2rem;
+    z-index: 10;
+    border-radius: 25px;
+    /* shadow */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    /* transition */
+    transition: transform 0.3s ease;
+    height: 300px;
+    width: 250px;
+}
+
+
+.team-members {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #9fcafc;
+    color: #303030;
+    padding: 15px 15px;
+    font-size: 1.2rem;
+    z-index: 10;
+    border-radius: 25px;
+    /* shadow */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    /* transition */
+    transition: transform 0.3s ease;
+    height: 300px;
+    width: 250px;
+}
+
+/* technologies-used points */
+.technologies-used ul,
+.team-members ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.technologies-used ul li,
+.team-members ul li {
+    margin-bottom: 5px;
+}

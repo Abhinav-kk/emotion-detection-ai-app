@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="{{ url_for('static', filename='innov8_logo.png') }}" alt="Logo" class="logo"
+                style="width: 350px; height: auto;">
+            <h2>Emotion Detection From Facial Expressions Model</h2>
+        </header>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="option">Choose the ML Model:</label>
+                <select name="option" id="option" required>
+                    {% for option in dropdown_options %}
+                    <option value="{{ option }}">{{ option }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="floating-container"></div>
+
+            <div class="form-group">
+                <label for="image">Upload Face Image:</label>
+                <input type="file" name="image" id="image" accept="image/*" required>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="image-section">
+            {% for img in images %}
+            <div class="image-container">
+                <img src="{{ img }}" alt="Image {{ loop.index }}" class="form-image">
+                <p>
+                    {{
+                    img.split('/').pop().split('.')[0].replace('_', ' ').capitalize()
+                    }}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Loading overlay -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Result display area -->
+        <div id="result" style="display: none;">
+            <p>Your result will appear here after loading.</p>
+        </div>
+
+
+        {% if result %}
+        <div class="result">
+            <h3>{{ result }}</h3>
+
+            {% if predicted_emotion %}
+            <div class="emotion-display">
+                <span class="emotion-text">{{ predicted_emotion.capitalize() }}</span>
+                <img src="{{ url_for('static', filename=predicted_emotion + '.jpg') }}"
+                    alt="{{ predicted_emotion }} image" class="emotion-image">
+                <span class="emotion-model">Prediction made with {{ model_name.capitalize() }} model!</span>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="technologies-used">
+            <h3>Technologies Used:</h3>
+            <ul>
+                <li>Python</li>
+                <li>Flask</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>TensorFlow</li>
+                <li>OpenCV</li>
+                <li>Numpy</li>
+
+            </ul>
+        </div>
+        <div class="team-members">
+            <h3>Team Members:</h3>
+            <ul>
+                <li>Akshat Mistry</li>
+                <li>Abhinav Kottayil</li>
+                <li>Raj Jagasia</li>
+                <li>Ishita Jagasia</li>
+                <li>Alyssa Guzman</li>
+                <li>Muhammed Ameen</li>
+                <li></li>
+                <li></li>
+            </ul>
+            <h3>Group 12: Innov8</h3>
+        </div>
+    </div>
+    <script>
+        function createFloatingElement(duration = 8) {
+            const floatingContainer = document.querySelector('.floating-container');
+            const element = document.createElement('div');
+            element.classList.add('floating-element');
+
+            // Randomize position, size, and animation duration
+            const randomX = Math.floor(Math.random() * 100); // Random horizontal position
+            const randomSize = Math.random() * 20 + 10; // Random size between 10px and 30px
+            const randomDuration = Math.random() * 3 + duration; // Set faster duration for loading effect
+
+            // Apply randomized styles
+            element.style.left = `${randomX}%`;
+            element.style.width = `${randomSize}px`;
+            element.style.height = `${randomSize}px`;
+            element.style.animationDuration = `${randomDuration}s`;
+
+            // Append to container and remove after animation
+            floatingContainer.appendChild(element);
+            setTimeout(() => {
+                floatingContainer.removeChild(element);
+            }, randomDuration * 1000);
+        }
+
+        // Regularly generate floating elements every second
+        let floatingInterval = setInterval(() => createFloatingElement(), 1000);
+
+        function showLoading() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const result = document.getElementById('result');
+            const floatingContainer = document.querySelector('.floating-container');
+
+            // Show loading overlay and adjust z-index for floating elements
+            loadingOverlay.style.display = 'flex';
+            floatingContainer.style.zIndex = '10'; // Bring floating elements in front
+
+            // Create 100 floating elements for a filled effect
+            for (let i = 0; i < 100; i++) {
+                createFloatingElement(4); // Shorter duration for faster movement
+            }
+
+            // After 2 seconds, hide loading overlay and revert z-index
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                floatingContainer.style.zIndex = '-1'; // Reset to original z-index
+                result.style.display = 'block';
+            }, 2000);
+        }
+
+        // Event listener for form submission
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevents actual form submission for demo purposes
+            showLoading(); // Show loading effect
+            setTimeout(() => this.submit(), 2000); // Submit form after loading is done
+        });
+    </script>
+
+
+</body>
+
+</html>
