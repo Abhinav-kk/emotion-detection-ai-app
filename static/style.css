@@ -151,9 +151,8 @@ label {
 }
 
 select {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
+    width: 520px;
+    padding: 15px;
     border-radius: 10px;
     /* Rounded corners */
     border: 1px solid #ccc;
@@ -183,9 +182,8 @@ select::after {
 }
 
 input[type="file"] {
-    width: 100%;
+    width: 500px;
     padding: 10px;
-    margin: 8px 0;
     border-radius: 10px;
     /* Rounded corners */
     border: 1px solid #ccc;
@@ -193,6 +191,13 @@ input[type="file"] {
     background-color: #fff;
     cursor: pointer;
 }
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 input[type="file"]::file-selector-button {
     background-color: #FCBF49;
